@@ -2,7 +2,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
-namespace TestAutomation.Pages
+namespace AutoProject.Pages
 {
     public class LoginPage
     {
@@ -10,6 +10,7 @@ namespace TestAutomation.Pages
         private readonly WebDriverWait _wait;
 
         // Seletores para os elementos de login da Amazon
+        private readonly By _accountList = By.Id("nav-link-accountList");
         private readonly By _emailField = By.Id("ap_email");
         private readonly By _continueButton = By.Id("continue");
         private readonly By _passwordField = By.Id("ap_password");
