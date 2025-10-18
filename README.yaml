@@ -1,0 +1,40 @@
+
+---
+
+## 🧠 Key Concepts
+
+### 🔸 Page Object Model (POM)
+Each page of the application is represented as a class, containing:
+- **Locators** (elements)
+- **Actions** (methods)
+- **Validations** (assertions)
+
+This makes the code **clean**, **reusable**, and **easy to maintain**.
+
+### 🔸 Quality Assurance Focus
+The test design follows **QA best practices**, ensuring:
+- Clear test naming conventions  
+- One assertion per test  
+- Data-driven testing  
+- Full isolation between tests  
+- Continuous integration readiness  
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/LuisNataan/GonnaAutomateItAll.git
+cd GonnaAutomateItAll
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Run the tests
+```bash
+npm run test
+```
