@@ -9,12 +9,11 @@ namespace AutoProject.Pages
         private readonly IWebDriver _driver;
         private readonly WebDriverWait _wait;
 
-        // Seletores para os elementos de login da Amazon
-        private readonly By _accountList = By.Id("nav-link-accountList");
-        private readonly By _emailField = By.Id("ap_email");
-        private readonly By _continueButton = By.Id("continue");
-        private readonly By _passwordField = By.Id("ap_password");
-        private readonly By _signInButton = By.Id("signInSubmit");
+        // Seletores para os elementos de login da SauceDemo
+        private readonly By _usernameField = By.Id("user-name");
+        private readonly By _passwordField = By.Id("password");
+        private readonly By _loginButton = By.Id("login-button");
+        private readonly By _errorMEssage = By.Id("[data-test='error']");
 
         public LoginPage(IWebDriver driver)
         {
@@ -24,17 +23,13 @@ namespace AutoProject.Pages
 
         public void NavigateToLoginPage()
         {
-            _driver.Navigate().GoToUrl("https://www.amazon.com.br/ap/signin");
+            _driver.Navigate().GoToUrl("https://www.saucedemo.com");
+            _wait.Until(ExpectedConditions.ElementIsVisible(_usernameField));
         }
 
-        public void EnterEmail(string email)
+        public void EnterUsername(string username)
         {
-            _wait.Until(ExpectedConditions.ElementIsVisible(_emailField)).SendKeys(email);
-        }
-
-        public void ClickContinue()
-        {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(_continueButton)).Click();
+            _wait.Until(ExpectedConditions.ElementIsVisible(_usernameField)).SendKeys(username);
         }
 
         public void EnterPassword(string password)
@@ -42,16 +37,16 @@ namespace AutoProject.Pages
             _wait.Until(ExpectedConditions.ElementIsVisible(_passwordField)).SendKeys(password);
         }
 
-        public void ClickSignIn()
+        public void ClickLogin()
         {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(_signInButton)).Click();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(_loginButton)).Click();
         }
 
-        public bool IsLoginPageDisplayed()
+        public bool IsErrorMessageDisplayed()
         {
             try
             {
-                return _wait.Until(ExpectedConditions.ElementIsVisible(_emailField)).Displayed;
+                return _wait.Until(ExpectedConditions.ElementIsVisible(_errorMEssage)).Displayed;
             }
             catch (WebDriverTimeoutException)
             {
