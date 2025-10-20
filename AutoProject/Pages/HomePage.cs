@@ -8,9 +8,8 @@ namespace AutoProject.Pages
     {
         private readonly IWebDriver _driver;
         private readonly WebDriverWait _wait;
-        private readonly By _searchBar = By.Id("twotabsearchtextbox");
-        private readonly By _userGreeting = By.Id("nav-link-accountList-nav-line-1");
-        private readonly By _cartIcon = By.Id("nav-cart");
+        private readonly By _inventoryContainer = By.Id("inventory_container");
+        private readonly By _menuButton = By.Id("react-burger-menu-btn");
 
         public HomePage(IWebDriver driver)
         {
@@ -21,7 +20,7 @@ namespace AutoProject.Pages
         {
             try
             {
-                return _wait.Until(ExpectedConditions.ElementIsVisible(_searchBar)).Displayed;
+                return _wait.Until(ExpectedConditions.ElementIsVisible(_inventoryContainer)).Displayed;
             }
             catch (WebDriverTimeoutException)
             {
@@ -29,22 +28,9 @@ namespace AutoProject.Pages
             }
         }
 
-        public string IsUserGreetingDisplayed()
+        public void OpenMenu()
         {
-            return _wait.Until(ExpectedConditions.ElementIsVisible(_userGreeting)).Text;
-        }
-
-        public void SearchProduct(string product)
-        {
-            var searchField = _wait.Until(ExpectedConditions.ElementIsVisible(_searchBar));
-            searchField.Clear();
-            searchField.SendKeys(product);
-            searchField.SendKeys(Keys.Enter);
-        }
-
-        public void ClickCartIcon()
-        {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(_cartIcon)).Click();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(_menuButton)).Click();
         }
     }
 }

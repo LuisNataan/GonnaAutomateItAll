@@ -13,12 +13,12 @@ namespace AutoProject.Pages
         private readonly By _usernameField = By.Id("user-name");
         private readonly By _passwordField = By.Id("password");
         private readonly By _loginButton = By.Id("login-button");
-        private readonly By _errorMEssage = By.Id("[data-test='error']");
+        private readonly By _errorMessage = By.Id("[data-test='error']");
 
         public LoginPage(IWebDriver driver)
         {
             _driver = driver;
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
         }
 
         public void NavigateToLoginPage()
@@ -46,7 +46,8 @@ namespace AutoProject.Pages
         {
             try
             {
-                return _wait.Until(ExpectedConditions.ElementIsVisible(_errorMEssage)).Displayed;
+                var errorElement = _wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("[data-test='error']")));
+                return errorElement.Displayed;
             }
             catch (WebDriverTimeoutException)
             {
