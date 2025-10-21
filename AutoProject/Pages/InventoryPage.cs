@@ -14,19 +14,18 @@ namespace AutoProject.Pages
             _driver = driver;
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
-        private By _addToCarton => By.CssSelector("[data-test='add-to-cart-sauce-labs-fleece-jacket']");
+        private By _addProductToCart => By.CssSelector("[data-test='add-to-cart-sauce-labs-fleece-jacket']");
         private By _cartIcon => By.CssSelector("[data-test='shopping-cart-link']");
         private By _inventoryContainer => By.CssSelector("[data-test='inventory-item']");
-        private By _inventoryItem => By.CssSelector("[data-test='inventory-item-name']");
 
         public void AddProductToCart()
         {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(_addToCarton)).Click();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(_addProductToCart)).Click();
         }
 
         public void NavigateToCartPage()
         {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(_cartIcon)).Click();
+            _wait.Until(ExpectedConditions.ElementIsVisible(_cartIcon)).Click();
         }
 
         public bool IsInventoryPageDisplayed()
