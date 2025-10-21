@@ -27,19 +27,11 @@ namespace AutoProject.Pages
             _wait.Until(ExpectedConditions.ElementIsVisible(_usernameField));
         }
 
-        public void EnterUsername(string username)
+        public void Login(string username, string password)
         {
-            _wait.Until(ExpectedConditions.ElementIsVisible(_usernameField)).SendKeys(username);
-        }
-
-        public void EnterPassword(string password)
-        {
-            _wait.Until(ExpectedConditions.ElementIsVisible(_passwordField)).SendKeys(password);
-        }
-
-        public void ClickLogin()
-        {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(_loginButton)).Click();
+            _wait.Until(ExpectedConditions.ElementIsVisible(By.Id("user-name"))).SendKeys(username);
+            _driver.FindElement(By.Id("password")).SendKeys(password);
+            _driver.FindElement(By.Id("login-button")).Click();
         }
 
         public bool IsErrorMessageDisplayed()

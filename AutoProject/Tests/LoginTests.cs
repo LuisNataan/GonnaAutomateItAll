@@ -1,58 +1,45 @@
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using AutoProject.Pages;
-using NUnit.Framework;
 
 namespace AutoProject.Tests
 {
     [TestFixture]
-    public class LoginTests
+    public class LoginTests : BaseTest
     {
-        private IWebDriver _driver;
-        private LoginPage _loginPage;
-        private HomePage _homePage;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _driver = new ChromeDriver();
-            _driver.Navigate().GoToUrl("https://www.saucedemo.com");
-            _driver.Manage().Window.Maximize();
-
-            _loginPage = new LoginPage(_driver);
-            _homePage = new HomePage(_driver);
-        }
 
         [Test]
         public void Login_WithValidCredentials_ShouldAccessHomePage()
         {
-            _loginPage.NavigateToLoginPage();
-            _loginPage.EnterUsername("standard_user");
-            _loginPage.EnterPassword("secret_sauce");
-            _loginPage.ClickLogin();
+            var loginPage = new LoginPage(Driver);
+            loginPage.NavigateToLoginPage();
+            loginPage.Login("standard_user", "secret_sauce");
 
-            Assert.That(_homePage.IsHomePageDisplayed(), Is.True, "Home page was not displayed after login.");
+            var homePage = new HomePage(Driver);
+            Assert.That(homePage.IsHomePageDisplayed(), Is.True, "Home page was not displayed after login.");
         }
 
         [Test]
         public void Login_WithInvalidCredentials_ShouldDisplayErrorMessage()
         {
-            _loginPage.NavigateToLoginPage();
-            _loginPage.EnterUsername("invalid_user");
-            _loginPage.EnterPassword("wrong_password");
-            _loginPage.ClickLogin();
+            var loginPage = new LoginPage(Driver);
+            loginPage.NavigateToLoginPage();
+            loginPage.Login("invalid_user", "invalid_password");
 
-            Assert.That(_loginPage.IsErrorMessageDisplayed(), Is.True, "Error message not displayed for invalid login.");
+            Assert.That(loginPage.IsErrorMessageDisplayed(), Is.True, "Error message not displayed for invalid login.");
         }
 
-        [TearDown]
-        public void TearDown()
+        [Test]
+        public void Login_WithValidCredentials_ShouldAccessInventoryPage()
         {
-            if (_driver != null)
-            {
-                _driver.Quit();
-                _driver.Dispose();
-            }
+            var loginPage = new LoginPage(Driver);
+            loginPage.NavigateToLoginPage();
+            loginPage.Login("standard_user", "secret_sauce");
+
+            var inventoryPage = new InventoryPage(Driver);
+            inventoryPage.AddProductToCart();
+            inventoryPage.NavigateToCartPage();
+
+            Assert.That(inventoryPage.IsInventoryPageDisplayed(), Is.True, "Cart page was not displayed after adding product to cart.");
         }
     }
 }
