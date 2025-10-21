@@ -15,6 +15,7 @@ namespace AutoProject.Pages
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
         private By _addProductToCart => By.CssSelector("[data-test='add-to-cart-sauce-labs-fleece-jacket']");
+        private By _removeProductFromCart => By.CssSelector("[data-test='remove-sauce-labs-fleece-jacket']");
         private By _cartIcon => By.CssSelector("[data-test='shopping-cart-link']");
         private By _inventoryContainer => By.CssSelector("[data-test='inventory-item']");
 
@@ -48,6 +49,11 @@ namespace AutoProject.Pages
         public void ClickCartIcon()
         {
             _wait.Until(ExpectedConditions.ElementToBeClickable(_cartIcon)).Click();
+        }
+
+        public void RemoveProductFromCart()
+        {
+            _wait.Until(ExpectedConditions.ElementToBeClickable(_removeProductFromCart)).Click();
         }
     }
 }
