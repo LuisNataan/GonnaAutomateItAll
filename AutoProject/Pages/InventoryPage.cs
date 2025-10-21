@@ -14,19 +14,19 @@ namespace AutoProject.Pages
             _driver = driver;
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
-        private By AddToCarton => By.CssSelector("[data-test='add-to-cart-sauce-labs-fleece-jacket']");
-        private By CartIcon => By.CssSelector("[data-test='shopping_cart_link']");
-        private By _inventoryContainer => By.CssSelector("[data-test='inventory_container']");
-        private By _inventoryItem => By.CssSelector("[data-test='inventory_item']");
+        private By _addToCarton => By.CssSelector("[data-test='add-to-cart-sauce-labs-fleece-jacket']");
+        private By _cartIcon => By.CssSelector("[data-test='shopping-cart-link']");
+        private By _inventoryContainer => By.CssSelector("[data-test='inventory-item']");
+        private By _inventoryItem => By.CssSelector("[data-test='inventory-item-name']");
 
         public void AddProductToCart()
         {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(AddToCarton)).Click();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(_addToCarton)).Click();
         }
 
         public void NavigateToCartPage()
         {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(CartIcon)).Click();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(_cartIcon)).Click();
         }
 
         public bool IsInventoryPageDisplayed()
@@ -48,7 +48,7 @@ namespace AutoProject.Pages
 
         public void ClickCartIcon()
         {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(CartIcon)).Click();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(_cartIcon)).Click();
         }
     }
 }
