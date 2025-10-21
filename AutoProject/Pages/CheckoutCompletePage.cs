@@ -18,7 +18,7 @@ namespace AutoProject.Pages
         public bool IsCheckoutComplete()
         {
             var header = _wait.Until(ExpectedConditions.ElementIsVisible(_completeHeader));
-            return header.Text.Contains("THANK YOU FOR YOUR ORDER");
+            return header.Text.Contains("Thank you for your order!");
         }
     }
 }

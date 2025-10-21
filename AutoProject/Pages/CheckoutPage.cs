@@ -22,9 +22,9 @@ namespace AutoProject.Pages
         public void FillCheckoutForm(string firstName, string lastName, string postalCode)
         {
             _wait.Until(ExpectedConditions.ElementIsVisible(_firstName)).SendKeys(firstName);
-            _wait.Until(ExpectedConditions.ElementIsVisible(_lastName)).SendKeys(lastName);
-            _wait.Until(ExpectedConditions.ElementIsVisible(_postalCode)).SendKeys(postalCode);
-            _wait.Until(ExpectedConditions.ElementIsVisible(_continueButton)).Click();
+            _driver.FindElement(_lastName).SendKeys(lastName);
+            _driver.FindElement(_postalCode).Clear();
+            _driver.FindElement(_postalCode).SendKeys(postalCode);
         }
 
         public void ClickContinue()
