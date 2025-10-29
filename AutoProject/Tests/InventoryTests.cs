@@ -16,8 +16,11 @@ namespace AutoProject.Tests
             var inventoryPage = new InventoryPage(Driver);
             inventoryPage.IsInventoryPageDisplayed();
             inventoryPage.GetNumberOfProducts();
-            Assert.That(inventoryPage.GetNumberOfProducts(), Is.GreaterThan(0), "No products displayed.");
-            Assert.That(inventoryPage.IsInventoryPageDisplayed(), Is.True, "Inventory page was not displayed after login.");
+            Assert.Multiple(() =>
+            {
+                Assert.That(inventoryPage.GetNumberOfProducts(), Is.GreaterThan(0), "No products displayed.");
+                Assert.That(inventoryPage.IsInventoryPageDisplayed(), Is.True, "Inventory page was not displayed after login.");
+            });
         }
 
         [Test]

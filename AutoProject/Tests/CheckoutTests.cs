@@ -26,10 +26,10 @@ namespace AutoProject.Tests
             cartPage.ClickCheckoutButton();
             checkoutPage.FillCheckoutForm("Natan", "Luis", "123 Main Street");
             checkoutPage.ClickContinue();
-            Assert.IsTrue(checkoutOverviewPage.IsOverviewPageDisplayed(), "Checkout overview page was not displayed.");
+            Assert.That(checkoutOverviewPage.IsOverviewPageDisplayed(), "Checkout overview page was not displayed.");
 
             checkoutOverviewPage.ClickFinishButton();
-            Assert.IsTrue(checkoutCompletePage.IsCheckoutComplete(), "Checkout complete page was not displayed.");
+            Assert.That(checkoutCompletePage.IsCheckoutComplete(), "Checkout complete page was not displayed.");
         }
     }
 }

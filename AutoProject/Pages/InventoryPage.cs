@@ -14,10 +14,10 @@ namespace AutoProject.Pages
             _driver = driver;
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
-        private By _addProductToCart => By.CssSelector("[data-test='add-to-cart-sauce-labs-fleece-jacket']");
-        private By _removeProductFromCart => By.CssSelector("[data-test='remove-sauce-labs-fleece-jacket']");
-        private By _cartIcon => By.CssSelector("[data-test='shopping-cart-link']");
-        private By _inventoryContainer => By.CssSelector("[data-test='inventory-item']");
+        private static By _addProductToCart => By.CssSelector("[data-test='add-to-cart-sauce-labs-fleece-jacket']");
+        private static By _removeProductFromCart => By.CssSelector("[data-test='remove-sauce-labs-fleece-jacket']");
+        private static By _cartIcon => By.CssSelector("[data-test='shopping-cart-link']");
+        private static By _inventoryContainer => By.CssSelector("[data-test='inventory-item']");
 
         public void AddProductToCart()
         {

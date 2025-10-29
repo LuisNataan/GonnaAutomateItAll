@@ -7,8 +7,8 @@ namespace AutoProject.Utils
 {
     public class WaitHelper
     {
-        private IWebDriver _driver;
-        private WebDriverWait _wait;
+        private readonly IWebDriver _driver;
+        private readonly WebDriverWait _wait;
 
         public WaitHelper(IWebDriver driver)
         {
