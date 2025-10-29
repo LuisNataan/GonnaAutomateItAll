@@ -29,16 +29,16 @@ namespace AutoProject.Pages
 
         public void Login(string username, string password)
         {
-            _wait.Until(ExpectedConditions.ElementIsVisible(By.Id("user-name"))).SendKeys(username);
-            _driver.FindElement(By.Id("password")).SendKeys(password);
-            _driver.FindElement(By.Id("login-button")).Click();
+            _wait.Until(ExpectedConditions.ElementIsVisible(_usernameField)).SendKeys(username);
+            _driver.FindElement(_passwordField).SendKeys(password);
+            _driver.FindElement(_loginButton).Click();
         }
 
         public bool IsErrorMessageDisplayed()
         {
             try
             {
-                var errorElement = _wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("[data-test='error']")));
+                var errorElement = _wait.Until(ExpectedConditions.ElementIsVisible(_errorMessage));
                 return errorElement.Displayed;
             }
             catch (WebDriverTimeoutException)
