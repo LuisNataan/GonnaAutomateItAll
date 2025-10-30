@@ -1,19 +1,18 @@
+using AutoProject.Pages.Base;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
 namespace AutoProject.Pages
 {
-    public class HomePage
+    public class HomePage : BasePage
     {
-        private readonly IWebDriver _driver;
         private readonly WebDriverWait _wait;
         private readonly By _inventoryContainer = By.Id("inventory_container");
         private readonly By _menuButton = By.Id("react-burger-menu-btn");
 
-        public HomePage(IWebDriver driver)
+        public HomePage(IWebDriver driver) : base(driver)
         {
-            this._driver = driver;
             this._wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
         public bool IsHomePageDisplayed()

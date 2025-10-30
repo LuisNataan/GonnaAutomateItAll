@@ -1,39 +1,38 @@
+using AutoProject.Pages.Base;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
 namespace AutoProject.Pages
 {
-    public class InventoryPage
+    public class InventoryPage : BasePage
     {
-        private readonly IWebDriver _driver;
         private readonly WebDriverWait _wait;
 
-        public InventoryPage(IWebDriver driver)
+        public InventoryPage(IWebDriver driver) : base(driver)
         {
-            _driver = driver;
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
-        private static By _addProductToCart => By.CssSelector("[data-test='add-to-cart-sauce-labs-fleece-jacket']");
-        private static By _removeProductFromCart => By.CssSelector("[data-test='remove-sauce-labs-fleece-jacket']");
-        private static By _cartIcon => By.CssSelector("[data-test='shopping-cart-link']");
-        private static By _inventoryContainer => By.CssSelector("[data-test='inventory-item']");
+        private static By AddJacketToCart => By.CssSelector("[data-test='add-to-cart-sauce-labs-fleece-jacket']");
+        private static By RemoveJacketFromCart => By.CssSelector("[data-test='remove-sauce-labs-fleece-jacket']");
+        private static By CartIcon => By.CssSelector("[data-test='shopping-cart-link']");
+        private static By InventoryContainer => By.CssSelector("[data-test='inventory-item']");
 
         public void AddProductToCart()
         {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(_addProductToCart)).Click();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(AddJacketToCart)).Click();
         }
 
         public void NavigateToCartPage()
         {
-            _wait.Until(ExpectedConditions.ElementIsVisible(_cartIcon)).Click();
+            _wait.Until(ExpectedConditions.ElementIsVisible(CartIcon)).Click();
         }
 
         public bool IsInventoryPageDisplayed()
         {
             try
             {
-                return _wait.Until(ExpectedConditions.ElementIsVisible(_inventoryContainer)).Displayed;
+                return _wait.Until(ExpectedConditions.ElementIsVisible(InventoryContainer)).Displayed;
             }
             catch (WebDriverTimeoutException)
             {
@@ -43,17 +42,17 @@ namespace AutoProject.Pages
 
         public int GetNumberOfProducts()
         {
-            return _driver.FindElements(_inventoryContainer).Count;
+            return _driver.FindElements(InventoryContainer).Count;
         }
 
         public void ClickCartIcon()
         {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(_cartIcon)).Click();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(CartIcon)).Click();
         }
 
         public void RemoveProductFromCart()
         {
-            _wait.Until(ExpectedConditions.ElementToBeClickable(_removeProductFromCart)).Click();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(RemoveJacketFromCart)).Click();
         }
     }
 }

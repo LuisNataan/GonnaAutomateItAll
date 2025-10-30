@@ -1,12 +1,12 @@
+using AutoProject.Pages.Base;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
 namespace AutoProject.Pages
 {
-    public class LoginPage
+    public class LoginPage : BasePage
     {
-        private readonly IWebDriver _driver;
         private readonly WebDriverWait _wait;
 
         // Seletores para os elementos de login da SauceDemo
@@ -15,9 +15,8 @@ namespace AutoProject.Pages
         private readonly By _loginButton = By.Id("login-button");
         private readonly By _errorMessage = By.Id("[data-test='error']");
 
-        public LoginPage(IWebDriver driver)
+        public LoginPage(IWebDriver driver) : base(driver)
         {
-            _driver = driver;
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
         }
 
